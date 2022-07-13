@@ -30,6 +30,7 @@ jobs:
         pushd .
         cd $(Build.SourcesDirectory)/tools/ci_build/github/linux/docker
         docker buildx build --push --tag onnxruntimebuildcache.azurecr.io/onnxruntimecpubuild:latest --cache-from onnxruntimebuildcache.azurecr.io/onnxruntimecpubuild:latest --build-arg BUILDKIT_INLINE_CACHE=1 --build-arg BUILD_UID=$( id -u ) -f Dockerfile.manylinux2014_cpu .
+        docker tag onnxruntimebuildcache.azurecr.io/onnxruntimecpubuild:latest onnxruntimecpubuild        
         docker run --rm \
           --volume /data/onnx:/data/onnx:ro \
           --volume $(Build.SourcesDirectory):/onnxruntime_src \
